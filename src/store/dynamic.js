@@ -2,13 +2,39 @@
 * @Author: eleven
 * @Date:   2017-10-21 23:21:38
 * @Last Modified by:   eleven
-* @Last Modified time: 2017-10-21 23:53:57
+* @Last Modified time: 2017-10-22 01:23:52
 */
 
-import React, { Component } from 'react';
+// code from git@github.com:didierfranc/react-code-splitting.git
 
-class Async extends Component {
+import React from 'react'
+import PropTypes from 'prop-types'
 
+export default class Async extends React.Component {
+  componentWillMount = () => {
+    this.cancelUpdate = false
+    this.props.load.then((c) => { 
+      this.C = c
+      if (!this.cancelUpdate) {
+        this.forceUpdate()
+      }
+    })
+  }
+
+  componentWillUnmount = () => {
+    this.cancelUpdate = true
+  }
+
+  render = () => {
+    const { componentProps } = this.props
+    return this.C
+      ? this.C.default
+        ? <this.C.default {...componentProps} />
+        : <this.C {...componentProps} />
+      : null
+  }
 }
 
-export default Async
+Async.propTypes = {
+  load: PropTypes.instanceOf(Promise).isRequired,
+}
