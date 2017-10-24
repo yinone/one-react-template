@@ -7,6 +7,7 @@ const alias = {
     views: path.resolve(__dirname, './src/views'),
     components: path.resolve(__dirname, './src/components'),
     utils: path.resolve(__dirname, './src/utils'),
+    routes: path.resolve(__dirname, './src/routes')
 }
 
 module.exports = function override(config, env) {
