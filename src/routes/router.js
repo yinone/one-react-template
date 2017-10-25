@@ -6,7 +6,7 @@
 */
 
 import React, { Component } from 'react';
-import PropTypes from 'propTypes';
+import PropTypes from 'prop-types';
 import pathToRegexp from 'path-to-regexp';
 import invariant from 'invariant'
 
@@ -15,14 +15,15 @@ class Router extends Component {
 	static propTypes = {
 		path: PropTypes.string,
 		exact: PropTypes.bool,
-		component: PropTypes.object,
+		component: PropTypes.func,
 		render: PropTypes.func
 	}
 	componentWillMount() {
-		window.addEventListener('popstate', stateHandle)
+		console.log('sd')
+		window.addEventListener('popstate', this.stateHandle)
 	}
 	componentWillUnmount() {
-		window.removeEventListener('popstate',stateHandle)
+		window.removeEventListener('popstate', this.stateHandle)
 	}
 
 	stateHandle(event) {
@@ -30,9 +31,17 @@ class Router extends Component {
 	}
 
 	render() {
-		return {
 
+		const { path, exact, component, render } = this.props;
+
+		
+		if( component ) {
+			return React.createElement(component, { ...this.props })
 		}
+		if( render ) {
+			return render({ ...this.props })
+		}
+
 	}
 }
 
