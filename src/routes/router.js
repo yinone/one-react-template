@@ -2,7 +2,7 @@
 * @Author: eleven
 * @Date:   2017-10-24 20:34:06
 * @Last Modified by:   eleven
-* @Last Modified time: 2017-10-24 22:07:34
+* @Last Modified time: 2017-10-26 01:23:07
 */
 
 import React, { Component } from 'react';
@@ -19,8 +19,7 @@ class Router extends Component {
 		render: PropTypes.func
 	}
 	componentWillMount() {
-		console.log('sd')
-		window.addEventListener('popstate', this.stateHandle)
+		window.addEventListener('hashchange', this.stateHandle)
 	}
 	componentWillUnmount() {
 		window.removeEventListener('popstate', this.stateHandle)

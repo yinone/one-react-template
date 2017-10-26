@@ -15,7 +15,7 @@ import Home from 'views/home';
 
 class App extends React.Component{
   goto() {
-    window.location.href = '/profile'
+    // window.location.href = '/pr'
   }
   render() {
     return ( 
